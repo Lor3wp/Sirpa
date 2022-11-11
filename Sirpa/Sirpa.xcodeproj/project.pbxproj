@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A675BA8291E1F8A00B51B93 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A675BA7291E1F8A00B51B93 /* DetailImageView.swift */; };
 		6AA71906291BCD4500F691FE /* SirpaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71905291BCD4500F691FE /* SirpaApp.swift */; };
 		6AA71908291BCD4500F691FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71907291BCD4500F691FE /* ContentView.swift */; };
-		6AA7190A291BCD4700F691FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA71909291BCD4700F691FE /* Assets.xcassets */; };
-		6AA7190D291BCD4700F691FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA7190C291BCD4700F691FE /* Preview Assets.xcassets */; };
-		6AA7190F291BCD4700F691FE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7190E291BCD4700F691FE /* Persistence.swift */; };
-		6AA71912291BCD4700F691FE /* Sirpa.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71910291BCD4700F691FE /* Sirpa.xcdatamodeld */; };
 		6AA7191D291BCD4700F691FE /* SirpaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7191C291BCD4700F691FE /* SirpaTests.swift */; };
 		6AA71927291BCD4700F691FE /* SirpaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71926291BCD4700F691FE /* SirpaUITests.swift */; };
 		6AA71929291BCD4700F691FE /* SirpaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71928291BCD4700F691FE /* SirpaUITestsLaunchTests.swift */; };
+		6AE25A38291E0B640093369D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE25A37291E0B640093369D /* HomeView.swift */; };
+		6AE25A3A291E0B700093369D /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE25A39291E0B700093369D /* PostView.swift */; };
+		6AE25A3C291E0B780093369D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE25A3B291E0B780093369D /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,19 +36,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A675BA7291E1F8A00B51B93 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
 		6AA71902291BCD4500F691FE /* Sirpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sirpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA71905291BCD4500F691FE /* SirpaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirpaApp.swift; sourceTree = "<group>"; };
 		6AA71907291BCD4500F691FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6AA71909291BCD4700F691FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6AA7190C291BCD4700F691FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		6AA7190E291BCD4700F691FE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		6AA71911291BCD4700F691FE /* Sirpa.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sirpa.xcdatamodel; sourceTree = "<group>"; };
-		6AA71913291BCD4700F691FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA71918291BCD4700F691FE /* SirpaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SirpaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA7191C291BCD4700F691FE /* SirpaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirpaTests.swift; sourceTree = "<group>"; };
 		6AA71922291BCD4700F691FE /* SirpaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SirpaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA71926291BCD4700F691FE /* SirpaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirpaUITests.swift; sourceTree = "<group>"; };
 		6AA71928291BCD4700F691FE /* SirpaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirpaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6AE25A37291E0B640093369D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6AE25A39291E0B700093369D /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		6AE25A3B291E0B780093369D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,21 +100,9 @@
 			children = (
 				6AA71905291BCD4500F691FE /* SirpaApp.swift */,
 				6AA71907291BCD4500F691FE /* ContentView.swift */,
-				6AA71909291BCD4700F691FE /* Assets.xcassets */,
-				6AA7190E291BCD4700F691FE /* Persistence.swift */,
-				6AA71913291BCD4700F691FE /* Info.plist */,
-				6AA71910291BCD4700F691FE /* Sirpa.xcdatamodeld */,
-				6AA7190B291BCD4700F691FE /* Preview Content */,
+				6AE25A36291E0B420093369D /* Views */,
 			);
 			path = Sirpa;
-			sourceTree = "<group>";
-		};
-		6AA7190B291BCD4700F691FE /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6AA7190C291BCD4700F691FE /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		6AA7191B291BCD4700F691FE /* SirpaTests */ = {
@@ -133,6 +120,17 @@
 				6AA71928291BCD4700F691FE /* SirpaUITestsLaunchTests.swift */,
 			);
 			path = SirpaUITests;
+			sourceTree = "<group>";
+		};
+		6AE25A36291E0B420093369D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6AE25A37291E0B640093369D /* HomeView.swift */,
+				6AE25A39291E0B700093369D /* PostView.swift */,
+				6AE25A3B291E0B780093369D /* ProfileView.swift */,
+				6A675BA7291E1F8A00B51B93 /* DetailImageView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,8 +237,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AA7190D291BCD4700F691FE /* Preview Assets.xcassets in Resources */,
-				6AA7190A291BCD4700F691FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,10 +261,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AA7190F291BCD4700F691FE /* Persistence.swift in Sources */,
-				6AA71912291BCD4700F691FE /* Sirpa.xcdatamodeld in Sources */,
+				6AE25A38291E0B640093369D /* HomeView.swift in Sources */,
 				6AA71908291BCD4500F691FE /* ContentView.swift in Sources */,
+				6AE25A3C291E0B780093369D /* ProfileView.swift in Sources */,
+				6AE25A3A291E0B700093369D /* PostView.swift in Sources */,
 				6AA71906291BCD4500F691FE /* SirpaApp.swift in Sources */,
+				6A675BA8291E1F8A00B51B93 /* DetailImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,19 +585,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		6AA71910291BCD4700F691FE /* Sirpa.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				6AA71911291BCD4700F691FE /* Sirpa.xcdatamodel */,
-			);
-			currentVersion = 6AA71911291BCD4700F691FE /* Sirpa.xcdatamodel */;
-			path = Sirpa.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 6AA718FA291BCD4500F691FE /* Project object */;
 }
