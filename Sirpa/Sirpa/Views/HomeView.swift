@@ -6,6 +6,7 @@
 //
 import MapKit
 import SwiftUI
+import CoreLocationUI
 
 struct Location: Identifiable{
     let id = UUID()
@@ -13,17 +14,22 @@ struct Location: Identifiable{
     let coordinate: CLLocationCoordinate2D
 }
 
+
 struct HomeView: View {
-    @State var mapRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298),
-        span: MKCoordinateSpan(latitudeDelta: 110, longitudeDelta:110)
-    )
+    
+    @StateObject var locationManager = LocationManager()
+
     @State var locations = [
         Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)),
         Location(name: "Metropolia myllypuro", coordinate: CLLocationCoordinate2D(latitude: 60.22344, longitude: 25.07795)),
-        Location(name: "Metropolia myyrmaki", coordinate: CLLocationCoordinate2D(latitude: 60.25875, longitude: 24.84508))
+        Location(name: "Metropolia myyrmaki", coordinate: CLLocationCoordinate2D(latitude: 60.25875, longitude: 24.84508)),
+        Location(name: "MArk 1", coordinate: CLLocationCoordinate2D(latitude: 37.78869, longitude: -122.40538)),
+        Location(name: "Mark 2", coordinate: CLLocationCoordinate2D(latitude: 37.791771, longitude: -122.39705)),
+        Location(name: "Mark 3", coordinate: CLLocationCoordinate2D(latitude: 37.78257, longitude: -122.39646))
     ]
-    
+    func PinLocation(){
+        
+    }
     var body: some View {
         ZStack{
             /*Map(coordinateRegion: $mapRegion, annotationItems: locations){
@@ -32,16 +38,35 @@ struct HomeView: View {
                 }
 
             }*/
-            MapView(locations: locations)
+            MapView(locations: locations, lManager: $locationManager.region)
+            
+            
+            VStack{
+                if let location = locationManager.location{
+                    Text("**Current location:**\(location.latitude),\(location.longitude)")
+                        .font(.callout)
+                        .foregroundColor(.white)
+                        .padding()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                }
+                Spacer()
+                LocationButton{
+                    locationManager.requestLocation()
+                }
+                .frame(width: 180, height: 40)
+                .cornerRadius(30)
+                .symbolVariant(.fill)
+                .foregroundColor(.white)
+            }
+            .padding()
         }
     }
 }
 struct MapView: UIViewRepresentable{
     @State var locations:[Location]
-    @State var mapRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298),
-        span: MKCoordinateSpan(latitudeDelta: 110, longitudeDelta:110)
-    )
+    @Binding var lManager:MKCoordinateRegion
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
         mapView.mapType = .hybridFlyover
@@ -61,8 +86,8 @@ struct MapView: UIViewRepresentable{
             uiView.addAnnotation(pin)
             
         }
-        uiView.setRegion(mapRegion, animated: true)
-        
+        uiView.setRegion(lManager, animated: true)
+        uiView.showsUserLocation = true
     }
     
 }

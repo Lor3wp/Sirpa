@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A675BA8291E1F8A00B51B93 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A675BA7291E1F8A00B51B93 /* DetailImageView.swift */; };
+		6A675BAA2924AF1700B51B93 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A675BA92924AF1700B51B93 /* LocationManager.swift */; };
 		6AA71906291BCD4500F691FE /* SirpaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71905291BCD4500F691FE /* SirpaApp.swift */; };
 		6AA71908291BCD4500F691FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA71907291BCD4500F691FE /* ContentView.swift */; };
 		6AA7191D291BCD4700F691FE /* SirpaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7191C291BCD4700F691FE /* SirpaTests.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		6A675BA7291E1F8A00B51B93 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
+		6A675BA92924AF1700B51B93 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		6AA71902291BCD4500F691FE /* Sirpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sirpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA71905291BCD4500F691FE /* SirpaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SirpaApp.swift; sourceTree = "<group>"; };
 		6AA71907291BCD4500F691FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				6AA71905291BCD4500F691FE /* SirpaApp.swift */,
 				6AA71907291BCD4500F691FE /* ContentView.swift */,
 				6AE25A36291E0B420093369D /* Views */,
+				6A675BA92924AF1700B51B93 /* LocationManager.swift */,
 			);
 			path = Sirpa;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				6AE25A38291E0B640093369D /* HomeView.swift in Sources */,
 				6AA71908291BCD4500F691FE /* ContentView.swift in Sources */,
 				6AE25A3C291E0B780093369D /* ProfileView.swift in Sources */,
+				6A675BAA2924AF1700B51B93 /* LocationManager.swift in Sources */,
 				6AE25A3A291E0B700093369D /* PostView.swift in Sources */,
 				6AA71906291BCD4500F691FE /* SirpaApp.swift in Sources */,
 				6A675BA8291E1F8A00B51B93 /* DetailImageView.swift in Sources */,
