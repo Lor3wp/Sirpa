@@ -16,7 +16,7 @@ struct ProfileView: View {
                     Image(systemName:"person.fill.turn.down")
                         .font(.system(size: 150))
                     
-                    NavigationLink(destination: DetailImageView()){
+                    NavigationLink(destination: DetailImageView(data: "Image")){
                         Text("Open image")
                             .frame(width: 200, height: 100)
                             .background(Color.yellow)

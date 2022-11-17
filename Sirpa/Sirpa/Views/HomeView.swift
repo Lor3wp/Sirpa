@@ -18,7 +18,12 @@ struct Location: Identifiable{
 struct HomeView: View {
     
     @StateObject var locationManager = LocationManager()
-
+    
+    @State var mapRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298),
+        span: MKCoordinateSpan(latitudeDelta: 110, longitudeDelta:110)
+    )
+    
     @State var locations = [
         Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)),
         Location(name: "Metropolia myllypuro", coordinate: CLLocationCoordinate2D(latitude: 60.22344, longitude: 25.07795)),
@@ -27,19 +32,29 @@ struct HomeView: View {
         Location(name: "Mark 2", coordinate: CLLocationCoordinate2D(latitude: 37.791771, longitude: -122.39705)),
         Location(name: "Mark 3", coordinate: CLLocationCoordinate2D(latitude: 37.78257, longitude: -122.39646))
     ]
-    func PinLocation(){
-        
-    }
+
     var body: some View {
         ZStack{
-            /*Map(coordinateRegion: $mapRegion, annotationItems: locations){
-                location in MapAnnotation(coordinate: location.coordinate){
-                    
-                }
+            Map(coordinateRegion: $locationManager.region, interactionModes: [.all], showsUserLocation: true, annotationItems: locations){item in AnyMapAnnotationProtocol(MapAnnotation(coordinate: item.coordinate){
+                NavigationLink(destination: DetailImageView(data: "\(item.coordinate)")){
+                    HStack{
+                        Image(systemName: "pin.fill")
+                            .resizable()
+                            .frame(width: 35, height: 30)
+                            .clipShape(Capsule())
+                            .foregroundColor(Color(.systemRed))
 
-            }*/
-            MapView(locations: locations, lManager: $locationManager.region)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+            })}
+            .onAppear{
+                MKMapView.appearance().mapType = .hybridFlyover
+                MKMapView.appearance().pointOfInterestFilter = .excludingAll
+            }
             
+            //MapView(locations: locations, lManager: $locationManager.region)
             
             VStack{
                 if let location = locationManager.location{
@@ -63,34 +78,17 @@ struct HomeView: View {
         }
     }
 }
-struct MapView: UIViewRepresentable{
-    @State var locations:[Location]
-    @Binding var lManager:MKCoordinateRegion
 
-    func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView(frame: .zero)
-        mapView.mapType = .hybridFlyover
-        return mapView
-    }
+struct AnyMapAnnotationProtocol: MapAnnotationProtocol{
+    var _annotationData: _MapAnnotationData
+        let value:Any
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        
-        for location in locations {
-        
-            let pin = MKPointAnnotation()
-            
-            pin.coordinate = location.coordinate
-            
-            pin.title = location.name
-            
-            uiView.addAnnotation(pin)
-            
-        }
-        uiView.setRegion(lManager, animated: true)
-        uiView.showsUserLocation = true
+    init<WrappedType:MapAnnotationProtocol>(_ value:WrappedType){
+        self.value=value
+        _annotationData = value._annotationData
     }
-    
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
