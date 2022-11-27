@@ -9,6 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @StateObject var speechRecognizer = SpeechRecognizer()
+    @State private var voiceText: String = ""
+    @State private var isRecording = false
+    @State private var buttonText = "press to record"
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -40,6 +45,25 @@ struct ContentView: View {
             }
             Text("Select an item")
         }
+        VStack {
+            Text("speech recording test")
+            TextEditor(text: $voiceText)
+            Button(buttonText, action: {
+                isRecording = !isRecording
+                print($isRecording)
+                if (isRecording == true) {
+                    buttonText = "press to stop recording"
+                    speechRecognizer.reset()
+                    speechRecognizer.transcribe()
+                } else {
+                    buttonText = "press to record"
+                    speechRecognizer.stopTranscribing()
+                    voiceText = voiceText + " " + speechRecognizer.transcript
+                }
+            })
+            .padding()
+        }
+        .padding()
     }
 
     private func addItem() {
