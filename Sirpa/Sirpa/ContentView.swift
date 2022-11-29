@@ -23,7 +23,10 @@ struct ContentView: View {
                     .tabItem(){
                         Image(systemName: "globe.americas")
                         Text("Home")
-                    }.tag(0)
+                    }
+                    .toolbar(.visible, for: .tabBar)
+                    .toolbarBackground(Color.black, for: .tabBar)
+                    .tag(0)
                         .highPriorityGesture(DragGesture().onEnded(({
                             self.handleSwipe(translation: $0.translation.width)
                         })))
@@ -50,7 +53,10 @@ struct ContentView: View {
                     .tabItem(){
                         Image(systemName: "person.fill")
                         Text("Home")
-                    }.tag(1)
+                    }
+                    .toolbar(.visible, for: .tabBar)
+                    .toolbarBackground(Color.black, for: .tabBar)
+                    .tag(1)
                         .highPriorityGesture(DragGesture().onEnded(({
                             self.handleSwipe(translation: $0.translation.width)
                         })))
