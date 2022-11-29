@@ -32,6 +32,16 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         }
 
     }
+    
+    func randomPinn(pinn:Location){
+        DispatchQueue.main.async {
+            self.location = pinn.coordinate
+            self.region = MKCoordinateRegion(
+                center: pinn.coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+            )
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }

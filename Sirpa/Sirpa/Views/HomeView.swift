@@ -63,7 +63,7 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .padding()
                         .clipShape(RoundedRectangle(cornerRadius: 10))
-
+                    
                 }
                 Spacer()
                 LocationButton{
@@ -73,8 +73,13 @@ struct HomeView: View {
                 .cornerRadius(30)
                 .symbolVariant(.fill)
                 .foregroundColor(.white)
+                Button("pinn"){
+                    let loc = locations.randomElement()
+                    locationManager.randomPinn(pinn: loc ?? Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)))
+                }
             }
             .padding()
+            
         }
     }
 }
