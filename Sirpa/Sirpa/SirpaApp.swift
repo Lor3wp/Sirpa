@@ -11,7 +11,7 @@ import SwiftUI
 struct SirpaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabContentView()
         }
     }
 }
