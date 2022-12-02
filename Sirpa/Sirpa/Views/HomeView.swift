@@ -32,55 +32,45 @@ struct HomeView: View {
         Location(name: "Mark 2", coordinate: CLLocationCoordinate2D(latitude: 37.791771, longitude: -122.39705)),
         Location(name: "Mark 3", coordinate: CLLocationCoordinate2D(latitude: 37.78257, longitude: -122.39646))
     ]
-
+    
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $locationManager.region, interactionModes: [.all], showsUserLocation: true, annotationItems: locations){item in AnyMapAnnotationProtocol(MapAnnotation(coordinate: item.coordinate){
-                NavigationLink(destination: DetailImageView(data: "\(item.coordinate)")){
-                    HStack{
-                        Image(systemName: "pin.fill")
-                            .resizable()
-                            .frame(width: 35, height: 30)
-                            .clipShape(Capsule())
-                            .foregroundColor(Color(.systemRed))
+            Map(coordinateRegion: $locationManager.region, interactionModes: [.all], showsUserLocation: true, annotationItems: locations, annotationContent: {
+                location in
+                MapMarker(coordinate: location.coordinate, tint: .red)
 
-                    }
-                }
-                .buttonStyle(PlainButtonStyle())
-                
-            })}
-            .onAppear{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                    MKMapView.appearance().mapType = .hybridFlyover
-                    MKMapView.appearance().pointOfInterestFilter = .excludingAll
-                }
+            })
+            .onAppear(){
+                MKMapView.appearance().mapType = .hybridFlyover
+                MKMapView.appearance().pointOfInterestFilter = .excludingAll
             }
             
-            //MapView(locations: locations, lManager: $locationManager.region)
             
-            VStack{
-                if let location = locationManager.location{
-                    Text("**Current location:**\(location.latitude),\(location.longitude)")
-                        .font(.callout)
-                        .foregroundColor(.white)
+//            MapView(locations: locations, lManager: $locationManager.region)
+            
+                        VStack{
+                            if let location = locationManager.location{
+                                Text("**Current location:**\(location.latitude),\(location.longitude)")
+                                    .font(.callout)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+                            }
+                            Spacer()
+                            LocationButton{
+                                locationManager.requestLocation()
+                            }
+                            .frame(width: 180, height: 40)
+                            .cornerRadius(30)
+                            .symbolVariant(.fill)
+                            .foregroundColor(.white)
+                            Button("pinn"){
+                                let loc = locations.randomElement()
+                                locationManager.randomPinn(pinn: loc ?? Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)))
+                            }
+                        }
                         .padding()
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    
-                }
-                Spacer()
-                LocationButton{
-                    locationManager.requestLocation()
-                }
-                .frame(width: 180, height: 40)
-                .cornerRadius(30)
-                .symbolVariant(.fill)
-                .foregroundColor(.white)
-                Button("pinn"){
-                    let loc = locations.randomElement()
-                    locationManager.randomPinn(pinn: loc ?? Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)))
-                }
-            }
-            .padding()
             
         }
     }
@@ -88,7 +78,7 @@ struct HomeView: View {
 
 struct AnyMapAnnotationProtocol: MapAnnotationProtocol{
     var _annotationData: _MapAnnotationData
-        let value:Any
+    let value:Any
     
     init<WrappedType:MapAnnotationProtocol>(_ value:WrappedType){
         self.value=value

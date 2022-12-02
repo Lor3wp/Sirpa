@@ -30,6 +30,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
                 span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
             )
         }
+        
 
     }
     
