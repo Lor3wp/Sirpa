@@ -13,13 +13,7 @@ struct ContentView: View {
         VStack{
             NavigationView{
                 TabView(selection : $selectedTab){
-                    ZStack(alignment: .bottom){
-                        HomeView()
-                        if(isPostingVisible){
-                            PostView()
-                                .frame(height: 250)
-                        }
-                    }
+                    HomeView()
                     .tabItem(){
                         Image(systemName: "globe.americas")
                         Text("Home")
@@ -30,26 +24,12 @@ struct ContentView: View {
                         .highPriorityGesture(DragGesture().onEnded(({
                             self.handleSwipe(translation: $0.translation.width)
                         })))
-                        .onAppear{
-                            print(self.selectedTab)
-                            self.oldSelectedTab = self.selectedTab}
-                    Text("post")
-                    
+                    PostView()
                         .tabItem(){
                             Image(systemName: "envelope.fill")
                         }
-                        .onAppear{
-                            self.selectedTab = self.oldSelectedTab
-                            self.isPostingVisible.toggle()
-                        }
-                        .tag(3)
-                    ZStack(alignment: .bottom){
-                        ProfileView(isPostingVisible: $isPostingVisible)
-                        if(isPostingVisible){
-                            PostView()
-                                .frame(height: 250)
-                        }
-                    }
+                        .tag(2)
+                    ProfileView()
                     .tabItem(){
                         Image(systemName: "person.fill")
                         Text("Home")
@@ -60,11 +40,6 @@ struct ContentView: View {
                         .highPriorityGesture(DragGesture().onEnded(({
                             self.handleSwipe(translation: $0.translation.width)
                         })))
-                        .onAppear{
-                            
-                            self.oldSelectedTab = self.selectedTab
-                            
-                        }
                     
                     
                 }

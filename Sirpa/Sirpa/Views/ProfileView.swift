@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Binding var isPostingVisible:Bool
     var body: some View {
         ZStack{
             VStack{
@@ -54,11 +53,7 @@ struct ProfileView: View {
                                             .foregroundColor(.red)
                                         
                                     }
-                                    .simultaneousGesture(TapGesture().onEnded{
-                                        if (isPostingVisible){
-                                            isPostingVisible.toggle()
-                                        }
-                                    })
+
                                 }
                                 
                             }
@@ -73,6 +68,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(isPostingVisible: .constant(true))
+        ProfileView()
     }
 }

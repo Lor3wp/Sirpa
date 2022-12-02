@@ -50,8 +50,10 @@ struct HomeView: View {
                 
             })}
             .onAppear{
-                MKMapView.appearance().mapType = .hybridFlyover
-                MKMapView.appearance().pointOfInterestFilter = .excludingAll
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    MKMapView.appearance().mapType = .hybridFlyover
+                    MKMapView.appearance().pointOfInterestFilter = .excludingAll
+                }
             }
             
             //MapView(locations: locations, lManager: $locationManager.region)
