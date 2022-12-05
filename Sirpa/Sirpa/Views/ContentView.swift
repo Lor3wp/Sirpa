@@ -18,7 +18,10 @@ struct ContentView: View {
     @State var imageList = [UIImage]()
     @State var filteredImageDictionary = [String:UIImage]()
     @State private var presentAlert = false
-
+    //For Voice Recognition
+    @StateObject var speechRecognizer = SpeechRecognizer()
+    @State private var isRecording = false
+    @State private var buttonText = "press to record"
     
     //timestamp
     func timeStamp() -> String {
@@ -150,7 +153,19 @@ struct ContentView: View {
                         .frame(width: 200, height: 200)
                 }
             }
-            
+            Button(buttonText, action: {
+                isRecording = !isRecording
+                print($isRecording)
+                if (isRecording == true) {
+                    buttonText = "press to stop recording"
+                    speechRecognizer.reset()
+                    speechRecognizer.transcribe()
+                } else {
+                    buttonText = "press to record"
+                    speechRecognizer.stopTranscribing()
+                    notes = notes + " " + speechRecognizer.transcript
+                }
+            })
             TextField("post notes", text: $notes)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textFieldStyle(RoundedBorderTextFieldStyle())
