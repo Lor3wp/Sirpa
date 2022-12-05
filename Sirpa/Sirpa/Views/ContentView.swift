@@ -168,21 +168,24 @@ struct ContentView: View {
             Text("Add item")
         }
     }
-        
-
+        .onAppear{
+            addingDataToMapMarkers()
+        }
 }
             
     
-    func addingDataToMapMarkers() -> Array<MapMarkers> {
+    func addingDataToMapMarkers() {
         
         for item in model.tripList {
             userID = item.userID
         }
         for item in model.postList {
             mapMarkerNew = MapMarkers(id: item.id, latitude: item.latitude, longitude: item.longitude, file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            print(mapMarkerNew)
                 mapMarkers.append(mapMarkerNew)
         }
-        return mapMarkers
+        print("markkers being added")
+        print( mapMarkers)
     }
     
     
