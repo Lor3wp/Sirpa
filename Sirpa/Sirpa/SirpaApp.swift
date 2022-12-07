@@ -28,7 +28,7 @@ struct SirpaApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        FirstPage()
+        ProfileView()
               .environment(\.managedObjectContext, persistenceController.container.viewContext)
       }
     }

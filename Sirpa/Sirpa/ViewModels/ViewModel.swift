@@ -76,6 +76,21 @@ class ViewModel: ObservableObject {
         }
     }
     
+    
+    func updateUserData(username: String, id: String) {
+        
+        DispatchQueue.main.async {
+            self.db.collection("userInfo").document(id).updateData(["username" : username]) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("username updated succesfully")
+                }
+            }
+
+        }
+    }
+    
     func getUserInfo() {
         
         db.collection("userInfo").getDocuments { snapshot, error in
@@ -171,6 +186,24 @@ class ViewModel: ObservableObject {
                     self.postList.removeAll { post in
                         // check for the todo to remove
                         return post.id == postToDelete.id
+                    }
+                }
+            }
+        }
+    }
+    
+    func deleteUser(userToDelete: User) {
+        
+        // specify the document ot delete
+        db.collection("userInfo").document(userToDelete.id).delete {error in
+            // check for errors
+            if error == nil {
+                // no errors
+                // update the ui from the main thread
+                DispatchQueue.main.async {
+                    self.userList.removeAll { user in
+                        // check for the todo to remove
+                        return user.id == userToDelete.id
                     }
                 }
             }

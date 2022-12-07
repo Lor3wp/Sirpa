@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailImageView: View {
     var data:String
+    
     var body: some View {
         Text(data)
     }

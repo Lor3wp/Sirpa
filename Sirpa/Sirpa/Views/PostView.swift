@@ -182,7 +182,7 @@ struct PostView: View {
         // Create storage reference
         let storageRef = Storage.storage().reference()
         // turn image into data
-        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        let imageData = selectedImage!.jpegData(compressionQuality: 0.3)
         // Check that we were able to convert it to data
         guard imageData != nil else {
             return

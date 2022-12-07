@@ -64,10 +64,6 @@ struct TestViewDatabase: View {
                     Text("Select photo")
                 }
                 
-                Button("click here") {
-                    print("adding data to marker \(addingDataToMapMarkers())")
-                }
-                
                 //Upload button
                 if selectedImage != nil {
                     Button {
@@ -271,12 +267,9 @@ struct TestViewDatabase: View {
         filteredImageDictionary = imageDictionary.filter{
             $0.key == postIDforImage
         }
-        print("image dictionary funkkarissa \(imageDictionary)")
-        print("filtered dictionary \(filteredImageDictionary)")
         for item in filteredImageDictionary {
             imageList.append(item.value)
         }
-        print("imagelist \(imageList)")
         return imageList
     }
     
