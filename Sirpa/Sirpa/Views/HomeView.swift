@@ -35,11 +35,7 @@ struct HomeView: View {
     
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $locationManager.region, interactionModes: [.all], showsUserLocation: true, annotationItems: markerLocations, annotationContent: {
-                location in
-                MapMarker(coordinate: location.coordinate, tint: .red)
-
-            })
+            Map(coordinateRegion: $mapRegion, interactionModes: [.all], showsUserLocation: true)
             .onAppear(){
                 MKMapView.appearance().mapType = .hybridFlyover
                 MKMapView.appearance().pointOfInterestFilter = .excludingAll
