@@ -6,10 +6,10 @@
 //
 
 import Foundation
+import CoreLocation
 struct MapMarkers: Identifiable {
     let id: String
-    let latitude: Double
-    let longitude: Double
+    let coordinate: CLLocationCoordinate2D
     let file: String
     let notes: String
     let timeStamp: String

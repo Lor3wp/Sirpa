@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 import Firebase
 import FirebaseStorage
-
+import CoreLocation
 struct ContentView: View {
     
     @ObservedObject var model = ViewModel()
@@ -19,7 +19,7 @@ struct ContentView: View {
     @State var filteredImageDictionary = [String:UIImage]()
     @State private var presentAlert = false
     @State var mapMarkers = [MapMarkers]()
-    @State var mapMarkerNew = MapMarkers(id: "", latitude: 0.0, longitude: 0.0, file: "", notes: "", timeStamp: "", tripID: "", userID: "")
+    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: "", tripID: "", userID: "")
     @State var userID = ""
     
     //timestamp
@@ -40,136 +40,12 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        VStack{
-            VStack {
-                if selectedImage != nil {
-                    Image(uiImage: selectedImage!)
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                    
-                }
+        ZStack{
+  
                 
-                Button {
-                    isPickerShowing = true
-                } label: {
-                    Text("Select photo")
-                }
-                
-                Button("click here") {
-                    print("adding data to marker \(addingDataToMapMarkers())")
-                }
-                
-                //Upload button
-                if selectedImage != nil {
-                    Button {
-                        // Upload image
-                        uploadPhoto()
-                    } label: {
-                        Text("Upload photo")
-                    }
-                }
-            }
-            .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
-                // image picker
-                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
-            }
-            .onAppear {
-                retreiveAllPostPhotos()
-            }
-            
-            
-            List(model.tripList) {
-                item in
-                    NavigationLink {
-                        Text("Item at \(item.tripName) with id \(item.id)")
-                        
-                        // posts
-                        List(model.postList.filter {
-                            $0.tripID.contains(item.id)
-                        }) {
-                            item in
-                            Button("Edit") {
-                                presentAlert = true
-                            }
-                            .alert("Update", isPresented: $presentAlert, actions: {
-                                
-                                TextField("Update your notes", text: $notes)
-                 
-                                Button("Update") {
-                                    model.updatePostData(notes: notes, id: item.id)
-                                    notes = ""
-                                }
-                                Button("cancel", role: .cancel, action: {
-                                    presentAlert = false
-                                    notes = ""
-                                })
-                            })
-                  
-                                Text(item.notes)
-                            List(imageDictionary.filter{
-                                $0.key.contains(item.id)
-                            }.map {
-                                $0.value
-                            }
-                                 , id: \.self) { item in
-                              
-                                Image(uiImage: item)
-                                    .resizable()
-                                    .frame(width: 200, height: 200)
-                           
-                            }
-                                 .frame(width: 200, height: 300)
-//                            List(retrievedImages, id: \.self) { image in
-//                                Image(uiImage: image)
-//                                    .resizable()
-//                                    .frame(width: 200, height: 200)
-//                            }
-                        }
-                
-                        Divider()
-                        
-                        
-                    } label: {
-                        Text(item.tripName)
-                    }
-            }
-            List(model.postList) {
-                item in
-                HStack {
-                    Text(item.notes)
-                    Spacer()
-                    Button(action: {
-                        model.deletePost(postToDelete: item)
-                    }, label: {
-                        Image(systemName: "minus.circle")
-                    })
-                    .buttonStyle(BorderlessButtonStyle())
-                }
-            }
-            Divider()
+            TabContentView(markers: $mapMarkers)
+                Button(action: {addingDataToMapMarkers()}, label: {Text("load markers from database")})
         
-            HStack {
-            
-                List(retrievedImages, id: \.self) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                }
-            }
-            
-            TextField("post notes", text: $notes)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            Button {
-                uploadPhoto()
-                // clear the text fields
-                selectedImage = nil
-            } label: {
-            Text("Add item")
-        }
-    }
-        .onAppear{
-            addingDataToMapMarkers()
         }
 }
             
@@ -180,7 +56,9 @@ struct ContentView: View {
             userID = item.userID
         }
         for item in model.postList {
-            mapMarkerNew = MapMarkers(id: item.id, latitude: item.latitude, longitude: item.longitude, file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            
+            mapMarkerNew = MapMarkers(id: item.id, coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            
             print(mapMarkerNew)
                 mapMarkers.append(mapMarkerNew)
         }
