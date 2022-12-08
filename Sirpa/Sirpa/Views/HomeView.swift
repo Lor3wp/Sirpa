@@ -35,39 +35,68 @@ struct HomeView: View {
     
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $mapRegion, interactionModes: [.all], showsUserLocation: true)
-            .onAppear(){
-                MKMapView.appearance().mapType = .hybridFlyover
-                MKMapView.appearance().pointOfInterestFilter = .excludingAll
-            }
+            //            Map(coordinateRegion: $locationManager.region, interactionModes: [.all], showsUserLocation: true)
+            //            .onAppear(){
+            //                MKMapView.appearance().mapType = .hybridFlyover
+            //                MKMapView.appearance().pointOfInterestFilter = .excludingAll
+            //            }
             
+            AreaMap(region: $locationManager.region, markersList: $markerLocations)
+            //            MapView(locations: locations, lManager: $locationManager.region)
             
-//            MapView(locations: locations, lManager: $locationManager.region)
-            
-                        VStack{
-                            if let location = locationManager.location{
-                                Text("**Current location:**\(location.latitude),\(location.longitude)")
-                                    .font(.callout)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            
-                            }
-                            Spacer()
-                            LocationButton{
-                                locationManager.requestLocation()
-                            }
-                            .frame(width: 180, height: 40)
-                            .cornerRadius(30)
-                            .symbolVariant(.fill)
-                            .foregroundColor(.white)
-                            Button("pinn"){
-                                let loc = locations.randomElement()
-                                locationManager.randomPinn(pinn: loc ?? Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)))
-                            }
-                        }
+            VStack{
+                if let location = locationManager.location{
+                    Text("**Current location:**\(location.latitude),\(location.longitude)")
+                        .font(.callout)
+                        .foregroundColor(.white)
                         .padding()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                }
+                Spacer()
+                LocationButton{
+                    locationManager.requestLocation()
+                }
+                .frame(width: 180, height: 40)
+                .cornerRadius(30)
+                .symbolVariant(.fill)
+                .foregroundColor(.white)
+                Button("pinn"){
+                    let loc = markerLocations.randomElement()
+                    locationManager.randomPinn(pinn: loc ?? MapMarkers(id: "none",
+                                                                       coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298),
+                                                                       file: "none",
+                                                                       notes: "none",
+                                                                       timeStamp: "none",
+                                                                       tripID: "none",
+                                                                       userID: "none"))
+                }
+            }
+            .padding()
             
+        }
+    }
+}
+
+struct AreaMap: View {
+    @Binding var region: MKCoordinateRegion
+    @Binding var markersList: [MapMarkers]
+    var body: some View {
+        let binding = Binding(
+            get: { self.region },
+            set: { newValue in
+                DispatchQueue.main.async {
+                    self.region = newValue
+                    
+                }
+            }
+        )
+        return Map(coordinateRegion: binding, showsUserLocation: true, annotationItems: markersList, annotationContent: {item in
+            MapMarker(coordinate: item.coordinate)
+        })
+        .onAppear(){
+            MKMapView.appearance().mapType = .hybridFlyover
+            MKMapView.appearance().pointOfInterestFilter = .excludingAll
         }
     }
 }

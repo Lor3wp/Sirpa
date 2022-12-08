@@ -21,9 +21,9 @@ struct TabContentView: View {
                     .toolbar(.visible, for: .tabBar)
                     .toolbarBackground(Color.black, for: .tabBar)
                     .tag(0)
-                        .highPriorityGesture(DragGesture().onEnded(({
-                            self.handleSwipe(translation: $0.translation.width)
-                        })))
+//                        .highPriorityGesture(DragGesture().onEnded(({
+//                            self.handleSwipe(translation: $0.translation.width)
+//                        })))
                     PostView()
                         .tabItem(){
                             Image(systemName: "envelope.fill")
@@ -37,9 +37,9 @@ struct TabContentView: View {
                     .toolbar(.visible, for: .tabBar)
                     .toolbarBackground(Color.black, for: .tabBar)
                     .tag(1)
-                        .highPriorityGesture(DragGesture().onEnded(({
-                            self.handleSwipe(translation: $0.translation.width)
-                        })))
+//                        .highPriorityGesture(DragGesture().onEnded(({
+//                            self.handleSwipe(translation: $0.translation.width)
+//                        })))
                     
                     
                 }
