@@ -10,6 +10,7 @@ import SwiftUI
 import CoreData
 import Firebase
 import FirebaseStorage
+import CoreLocation
 
 struct TestViewDatabase: View {
     
@@ -27,7 +28,7 @@ struct TestViewDatabase: View {
     @State var filteredImageDictionary = [String:UIImage]()
     @State private var presentAlert = false
     @State var mapMarkers = [MapMarkers]()
-    @State var mapMarkerNew = MapMarkers(id: "", latitude: 0.0, longitude: 0.0, file: "", notes: "", timeStamp: "", tripID: "", userID: "")
+    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: "", tripID: "", userID: "")
     @State var userID = ""
     
     
@@ -181,7 +182,7 @@ struct TestViewDatabase: View {
             userID = item.userID
         }
         for item in model.postList {
-            mapMarkerNew = MapMarkers(id: item.id, latitude: item.latitude, longitude: item.longitude, file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            mapMarkerNew = MapMarkers(id: item.id,  coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
             mapMarkers.append(mapMarkerNew)
         }
         return mapMarkers

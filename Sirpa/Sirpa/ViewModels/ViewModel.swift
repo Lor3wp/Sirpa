@@ -141,7 +141,7 @@ class ViewModel: ObservableObject {
     }
     
     
-    func getPosts() {
+    func getPosts(){
    
         // Read the documents at a specific path
         
@@ -169,8 +169,7 @@ class ViewModel: ObservableObject {
                 // Handle the error
             }
             
-        }
-            
+        } 
         }
     
     
