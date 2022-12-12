@@ -87,8 +87,17 @@ struct AreaMap: View {
                 }
             }
         )
-        return Map(coordinateRegion: binding, showsUserLocation: true, annotationItems: markersList, annotationContent: {item in
-            MapMarker(coordinate:item.coordinate)
+        let secondBinding = Binding(
+            get: {self.markersList},
+            set: {value in
+                DispatchQueue.main.async {
+                    self.markersList = value
+                }
+            })
+        return Map(coordinateRegion: binding, showsUserLocation: true, annotationItems: secondBinding.wrappedValue, annotationContent: {item in
+            MapPin(coordinate: item.coordinate)
+                
+                
 //            MapAnnotation(coordinate:item.coordinate){
 //                Circle()
 //            }
