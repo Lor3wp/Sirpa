@@ -7,6 +7,8 @@
 import MapKit
 import SwiftUI
 import CoreLocationUI
+import Firebase
+import FirebaseFirestore
 
 struct Location: Identifiable{
     let id = UUID()
@@ -25,12 +27,7 @@ struct HomeView: View {
     )
     @Binding var markerLocations:[MapMarkers]
     @State var locations = [
-        Location(name: "Metropolia karamalmi", coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298)),
-        Location(name: "Metropolia myllypuro", coordinate: CLLocationCoordinate2D(latitude: 60.22344, longitude: 25.07795)),
-        Location(name: "Metropolia myyrmaki", coordinate: CLLocationCoordinate2D(latitude: 60.25875, longitude: 24.84508)),
-        Location(name: "MArk 1", coordinate: CLLocationCoordinate2D(latitude: 37.78869, longitude: -122.40538)),
-        Location(name: "Mark 2", coordinate: CLLocationCoordinate2D(latitude: 37.791771, longitude: -122.39705)),
-        Location(name: "Mark 3", coordinate: CLLocationCoordinate2D(latitude: 37.78257, longitude: -122.39646))
+
     ]
     
     var body: some View {
@@ -67,7 +64,7 @@ struct HomeView: View {
                                                                        coordinate: CLLocationCoordinate2D(latitude: 60.223932, longitude: 24.758298),
                                                                        file: "none",
                                                                        notes: "none",
-                                                                       timeStamp: "none",
+                                                                       timeStamp: Timestamp(),
                                                                        tripID: "none",
                                                                        userID: "none"))
                 }
@@ -87,12 +84,20 @@ struct AreaMap: View {
             set: { newValue in
                 DispatchQueue.main.async {
                     self.region = newValue
-                    
                 }
             }
         )
         return Map(coordinateRegion: binding, showsUserLocation: true, annotationItems: markersList, annotationContent: {item in
-            MapMarker(coordinate: item.coordinate)
+            MapMarker(coordinate:item.coordinate)
+//            MapAnnotation(coordinate:item.coordinate){
+//                Circle()
+//            }
+//            DispatchQueue.main.async{
+//                MapAnnotation(coordinate:item.coordinate){
+//                    Circle()
+//                }
+//            }
+                
         })
         .onAppear(){
             MKMapView.appearance().mapType = .hybridFlyover

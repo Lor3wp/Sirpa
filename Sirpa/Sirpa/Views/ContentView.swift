@@ -20,7 +20,7 @@ struct ContentView: View {
     @State var filteredImageDictionary = [String:UIImage]()
     @State private var presentAlert = false
     @State var mapMarkers = [MapMarkers]()
-    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: "", tripID: "", userID: "")
+    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: Timestamp(), tripID: "", userID: "")
     @State var userID = ""
     
     //timestamp
@@ -46,7 +46,7 @@ struct ContentView: View {
                 
             TabContentView(markers: $mapMarkers)
             Button("load markers"){
-                ContentView().addingDataToMapMarkers()
+                addingDataToMapMarkers()
             }
                 
         
@@ -61,7 +61,7 @@ struct ContentView: View {
         }
         for item in model.postList {
             
-            mapMarkerNew = MapMarkers(id: item.id, coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            mapMarkerNew = MapMarkers(id: item.id, coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: Timestamp(), tripID: item.tripID, userID: userID)
             
             print(mapMarkerNew)
                 mapMarkers.append(mapMarkerNew)

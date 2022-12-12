@@ -28,7 +28,7 @@ struct TestViewDatabase: View {
     @State var filteredImageDictionary = [String:UIImage]()
     @State private var presentAlert = false
     @State var mapMarkers = [MapMarkers]()
-    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: "", tripID: "", userID: "")
+    @State var mapMarkerNew = MapMarkers(id: "", coordinate: CLLocationCoordinate2D(), file: "", notes: "", timeStamp: Timestamp(), tripID: "", userID: "")
     @State var userID = ""
     
     
@@ -182,7 +182,7 @@ struct TestViewDatabase: View {
             userID = item.userID
         }
         for item in model.postList {
-            mapMarkerNew = MapMarkers(id: item.id,  coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: item.timeAdded, tripID: item.tripID, userID: userID)
+            mapMarkerNew = MapMarkers(id: item.id,  coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude), file: item.file, notes: item.notes, timeStamp: Timestamp(), tripID: item.tripID, userID: userID)
             mapMarkers.append(mapMarkerNew)
         }
         return mapMarkers
