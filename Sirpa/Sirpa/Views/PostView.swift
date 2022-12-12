@@ -39,8 +39,7 @@ struct PostView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.userID, order: .reverse)]) var cdUserID:
-    FetchedResults<OnlineUser>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.userID, order: .reverse)]) var cdUserID: FetchedResults<OnlineUser>
     
     var body: some View {
         ZStack {

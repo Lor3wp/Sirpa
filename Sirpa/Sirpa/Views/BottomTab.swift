@@ -25,6 +25,7 @@ struct BottomTab: View {
                 NavigationView{
                     TabView(selection : $selectedTab){
                         HomeView()
+                            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                         .tabItem(){
                             Image(systemName: "globe.americas")
                             Text("Home")
@@ -36,11 +37,13 @@ struct BottomTab: View {
                                 self.handleSwipe(translation: $0.translation.width)
                             })))
                         PostView()
+                            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                             .tabItem(){
                                 Image(systemName: "plus")
                             }
                             .tag(2)
                         ProfileView()
+                            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
                         .tabItem(){
                             Image(systemName: "person.fill")
                             Text("Profile")

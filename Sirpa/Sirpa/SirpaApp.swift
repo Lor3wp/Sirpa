@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct SirpaApp: App {
 //    let persistenceController = PersistenceController.shared
     @StateObject private var coreDataManager = CoreDataManager()
-    
+
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
@@ -33,5 +33,9 @@ struct SirpaApp: App {
               .environment(\.managedObjectContext, coreDataManager.container.viewContext)
       }
     }
+
+    
   }
+    
+    
 }

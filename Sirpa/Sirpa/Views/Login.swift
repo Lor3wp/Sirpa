@@ -14,8 +14,11 @@ struct Login: View {
     
     @ObservedObject var model = ViewModel()
     @Environment (\.managedObjectContext) var managedObjectContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.userID, order: .reverse)]) var cdUserID:
-    FetchedResults<OnlineUser>
+    
+    @FetchRequest(
+      entity: OnlineUser.entity(),
+      sortDescriptors: [NSSortDescriptor(key: "userID", ascending: true)]
+    ) var items: FetchedResults<OnlineUser>
     
     @State var username = ""
     @State var homeCountry = ""
@@ -164,6 +167,7 @@ struct Login: View {
                         model.retrievedImages.append(self.selectedImage!)
                     }
                     DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
+                        print(model.userList.map{$0.id})
                         CoreDataManager().saveUserID(userID: model.userList.map{$0.id}[0] as! String, context: managedObjectContext)
                     }
 
