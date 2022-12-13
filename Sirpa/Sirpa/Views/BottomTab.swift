@@ -1,8 +1,11 @@
 import SwiftUI
-
+import MapKit
+import CoreLocationUI
+import Firebase
+import FirebaseStorage
 struct BottomTab: View {
     @Binding var markers: [MapMarkers]
-    @State private var selectedTab = 0
+    @State var selectedTab = 0
     @State private var oldSelectedTab = 0
     @State private var isPostingVisible = false
     let tabsTotal = 2
@@ -24,7 +27,7 @@ struct BottomTab: View {
 //                        .highPriorityGesture(DragGesture().onEnded(({
 //                            self.handleSwipe(translation: $0.translation.width)
 //                        })))
-                    PostView()
+                    PostView(tab: $selectedTab)
                         .tabItem(){
                             Image(systemName: "envelope.fill")
                         }

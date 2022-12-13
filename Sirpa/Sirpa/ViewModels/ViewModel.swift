@@ -187,7 +187,8 @@ class ViewModel: ObservableObject {
                         }
                     }
                 }
-                
+                print("postaukset \(self.postList)")
+
                 
             }
             else {
