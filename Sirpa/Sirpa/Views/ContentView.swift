@@ -36,15 +36,11 @@ struct ContentView: View {
 
 
     var body: some View {
-        ZStack{
-  
-                
+        ZStack{   
             BottomTab(markers: $mapMarkers)
             Button("load markers"){
                 addingDataToMapMarkers()
             }
-                
-        
         }
 }
             
